@@ -1,0 +1,45 @@
+This has to be 100% true...
+
+Common #Kubernetes pod related errors and ways to mitigate them ☸
+
+▶ ImagePullBackOff
+When K8's is unable to retrieve the image for one of the pod's container
+There are 3 common causes:
+✔ Invalid image name
+✔ Non-existent tag specified for the image
+✔ Attempting to retrieve an image from a private registry without proper credentials
+To resolve the first two cases, correct the image name and tag and for 3rd add the credentials for the private registry to a Secret and reference it in the pods.
+
+▶ RunContainerError
+Occurs when the container fails to start before the application
+Common causes include:
+✔ Mounting a read-only volume as read-write
+✔ Mounting a non-existent volume, such as ConfigMap or Secrets
+More detailed information can be obtained by describing the "failed" pod.
+
+▶ CrashLoopBackOff
+If a container fails to start, Kubernetes displays the CrashLoopBackOff status message
+Possible reasons:
+✔ An error within the application preventing it from starting
+✔ Misconfiguration of the container
+✔ The Liveness probe failing multiple times
+
+▶ Pending Pods
+If pods remain in a pending state, assuming the scheduler is functioning properly, the following may be causing it:
+✔ Insufficient cluster resources, such as CPU and memory, to run the pod
+✔ The current namespace has a ResourceQuota object, and creating the pod would exceed the quota
+✔ The pod is associated with a pending PersistentVolumeClaim
+To investigate these issues, it is recommended to examine the Events section in the output of "kubectl describe" command.
+
+Follow Arun Yadav for more such learning.
+===========================================================
+
+15 𝐅𝐑𝐄𝐄 𝐂𝐞𝐫𝐭𝐢𝐟𝐢𝐜𝐚𝐭𝐢𝐨𝐧 𝐩𝐫𝐨𝐯𝐢𝐝𝐞𝐝 𝐛𝐲 𝐭𝐡𝐞 𝐂𝐈𝐒𝐀 (Cyber & Infrastructure Security Agency of the United States)
+1. Cloud Computing Security https://fedvte.usalearning.gov/publiccourses/cloud2/cloudframe.php
+2. Cloud Security - What Leaders Need to Know https://fedvte.usalearning.gov/publiccourses/IMR_cloud/index01.htm?track=trackingon
+3. Cryptocurrency for Law Enforcement for the Public https://fedvte.usalearning.gov/publiccourses/cryptocurrency/index.htm?track=trackingon
+4. Cyber Supply Chain Risk Management for the Public https://fedvte.usalearning.gov/publiccourses/cscrm/index.htm?track=trackingon
+5. Cyberessentials https://fedvte.usalearning.gov/publiccourses/cyberessentials/index.htm?track=trackingon
+6. Don’t Wake Up to a Ransomware Attack https://fedvte.usalearning.gov/publiccourses/IMR_RANS/index01.htm?track=trackingon
+7. Foundations of Cybersecurity for Managers https://fedvte.usalearning.gov/publiccourses/fcsm/fcsmframe.php
+8. Fundamentals of Cyber Risk Management https://fedvte.usalearning.gov/publiccourses
